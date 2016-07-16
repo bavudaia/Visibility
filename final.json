@@ -1,0 +1,180 @@
+0.14.4 Node-RED Deploy  
+filter nodes
+input
+inject
+catch
+status
+link
+mqtt
+http
+websocket
+serial
+tcp
+mqlight
+ibmiot
+output
+debug
+link
+mqtt
+http response
+websocket
+serial
+tcp
+udp
+mqlight
+twilio
+ibmpush
+ibmiot
+OpenWhisk
+function
+function
+template
+delay
+trigger
+comment
+http request
+switch
+change
+range
+split
+join
+csv
+html
+json
+xml
+rbe
+tcp request
+OpenWhisk
+social
+e mail
+twitter
+e mail
+twitter
+storage
+mongodb
+ibm hdfs
+ibm hdfs
+cloudant
+sqldb
+dashDB
+mongodb
+cloudant
+sqldb
+dashDB
+analysis
+sentiment
+advanced
+feedparse
+weather
+weather
+insights
+IBM_Watson
+concept
+insights
+upload
+document
+concept
+insights
+search
+concept
+insights
+search
+concepts
+concept
+insights
+related
+concepts
+conversation
+convert
+Dialog
+Feature
+Extract
+language
+identification
+language
+translation
+natural
+language
+classifier
+news
+personality
+insights
+relationship
+extraction
+retrieve and
+rank create
+cluster
+retrieve and
+rank cluster
+settings
+retrieve and
+rank upload
+solr
+configuration
+retrieve and
+rank solr
+configuration
+settings
+retrieve and
+rank solr
+collection
+retrieve and
+rank create
+ranker
+retrieve and
+rank ranker
+settings
+retrieve and
+rank search
+and rank
+speech to
+text
+text to
+speech
+tone analyzer
+v3
+tradeoff
+analytics
+visual
+recognition v3
+visual
+recognition
+util v3
+Watson_Deprecated
+conversation
+tone analyzer
+visual
+recognition
+watson visual
+util
+watson visual
+training
+Image
+Analysis
+ 
+Flow 1
+[get] /reco
+HTTP Response
+Check image param
+Get Image URL
+Report
+Extract img URL
+d2
+AudioIn
+disconnected
+d1
+[ws] /ws/audio
+disconnected
+Extract text
+Text-Speech
+Visual Recognition Debug Point
+visual recognition v3
+  
+info
+debug
+config
+Export nodes to clipboard
+ Nodes:
+
+[{"id":"2d2b47bc.2469f8","type":"http in","z":"11c10b4b.de6f25","name":"","url":"/reco","method":"get","swaggerDoc":"","x":450,"y":407,"wires":[["81f72fff.2364"]]},{"id":"b3abf1a3.17309","type":"http response","z":"11c10b4b.de6f25","name":"HTTP Response","x":1225.9999694824219,"y":455,"wires":[]},{"id":"81f72fff.2364","type":"switch","z":"11c10b4b.de6f25","name":"Check image param","property":"payload.imageurl","propertyType":"msg","rules":[{"t":"null"},{"t":"else"}],"checkall":"false","outputs":2,"x":638,"y":452,"wires":[["d267079a.6b0268"],["ff15a9b4.bd86a8"]]},{"id":"d267079a.6b0268","type":"template","z":"11c10b4b.de6f25","name":"Get Image URL","field":"payload","fieldType":"msg","format":"html","syntax":"mustache","template":"<html>\n<head>\n<title>CMPE 272 Mini Project Team #17</title>\n<script type=\"text/javascript\">\nfunction formSubmit() {\n    var url = document.getElementById('imageurl').value;\n\tdocument.getElementById('inputurl').disabled = true;\n    if (!checkURL(url)) {\n        alert(\"The image url provided is not valid !!!\");\n        document.getElementById('inputurl').disabled = false;\n\t\treturn(false);\n    }\n    checkTheImageBytes(url, function(testURL, result) {\n        if (result == \"success\") {\n            document.forms[\"submitIMGurl\"].submit();\n        } else if (result == \"error\") {\n            alert(\"The image url provided is not valid !!!\");\n        } else {\n            alert(\"The image url provided is not valid !!!\");\n        }\n\t\tdocument.getElementById('inputurl').disabled = false;\n\n    });\n    return(false); \n}\n\nfunction checkURL(url) {\n    return(url.match(/\\.(jpeg|jpg|gif|png)$/) != null);\n}\n\n\nfunction checkTheImageBytes(url, callback, timeout) {\n    timeout = timeout || 5000;\n    var timedOut = false, timer;\n    var img = new Image();\n    img.onerror = img.onabort = function() {\n        if (!timedOut) {\n            clearTimeout(timer);\n            callback(url, \"error\");\n        }\n    };\n    img.onload = function() {\n        if (!timedOut) {\n            clearTimeout(timer);\n            callback(url, \"success\");\n        }\n    };\n    img.src = url;\n    timer = setTimeout(function() {\n        timedOut = true;\n        callback(url, \"timeout\");\n    }, timeout); \n}\n</script>\n\n<style>\n\n#header {\n    background-color: #264a60;\n    color:white;\n    text-align:center;\n\tposition: relative;\n    padding:5px;\n\tfont-family: Gill Sans, Verdana;\n\tfont-size: 11px;\n\tline-height: 14px;\n\tletter-spacing: 2px;\n\tfont-weight: bold;\n}\n#top {\n    background: #264a60;\n    height: 72px;\n    position: relative;\n    z-index: 100;\n}\n#q {\n    background-color:#848484;\n    color:white;\n    text-align:center;\n    padding:5px;\n\tfont-family: Gill Sans, Verdana;\n\tfont-size: 11px;\n\tline-height: 14px;\n\tletter-spacing: 2px;\n\tfont-weight: bold;\n}\n \n.textbox { \n    border: 1px solid #848484; \n    -webkit-border-radius: 30px; \n    -moz-border-radius: 30px; \n    border-radius: 30px; \n    outline:0; \n    height:25px; \n    width: 275px; \n    padding-left:10px; \n    padding-right:10px; \n  } \n\n.button {\n    background-color: #4CAF50; \n    border: none;\n    color: white;\n    padding: 16px 32px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    font-size: 16px;\n    margin: 4px 2px;\n    -webkit-transition-duration: 0.4s; \n    transition-duration: 0.4s;\n    cursor: pointer;\n}\n.button1 {\n    background-color: white; \n    color: black; \n    border: 2px solid #4CAF50;\n}\n\n.button1:hover {\n    background-color: #4CAF50;\n    color: white;\n}\n\n#section {\n\tbackground-color: #808080;\n\tmargin: auto;\n    padding: 10px;\n}\n#i1 {\n    padding:10px;\n}\n</style>\n</head>\n<body background = \"#303030\">\n\n<div id = \"header\">\n<h1>Image recognition with Audio feedback</h1>\n</div>\n<div id = \"q\">\n<h2>Sample Images</h2>\n</div>\n<form  align = \"center\" onsubmit = \t\"return formSubmit();\" name =\"submitIMGurl\" action=\"{{req._parsedUrl.pathname}}\">\n<div align = \"center\" >\n\t<img src=\"https://beccasheppard.files.wordpress.com/2011/09/football.jpg\" height='150'/>\n    <img src=\"http://www.rfi.ro/sites/default/files/styles/inside_content/public/articol/scandal_meciul_astra_steaua_trei_goluri_anulate.jpg\" height='150'/>  \n    <img src=\"http://i.onionstatic.com/onion/5056/9/original/1200.jpg\" height='150'/>\n    <img src=\"https://www.abchomeandcommercial.com/upload/images/Bed%20Bug/bedbugs2.jpg\" height='150'/>\n\t<img src=\"http://www.tigerfdn.com/wp-content/uploads/2015/05/ever-wonderred-what-do-tigers-eat.jpg\" height='150'/>\n\t<img src=\"https://upload.wikimedia.org/wikipedia/commons/a/ab/3Falls_Niagara.jpg\" height='150'/>\n\n</div>\n<div align = \"center\">\n\t<h3>Drag and drop any of the above images in text area or copy paste any other web image URL</h3><br/>\n    <input type=\"url\" class=\"textbox\" id = \"imageurl\" name=\"imageurl\"/>\n    <input type=\"submit\" class=\"button button1\" value=\"Analyze\" id = \"inputurl\" />\n</div>\n</form>\n\n\n</body>\n\n</html>\n\n","x":868,"y":438,"wires":[["b3abf1a3.17309"]]},{"id":"b03eeac1.c707e8","type":"template","z":"11c10b4b.de6f25","name":"Report","field":"result.images[0].classifiers[0].classes","fieldType":"msg","format":"html","syntax":"mustache","template":"<html>\n<head>\n<title>CMPE 272 Mini Project Team #17</title>\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js\"></script>\n    <script type=\"text/javascript\">\n    var audioOuputSocket = \"ws://\" + window.location.host + \"/ws/audio\";\n\tvar wsUri = \"ws://{{req.headers.host}}/ws/AudioIn\";\n\tvar ws = new WebSocket(wsUri);\n    $(document).ready(function(){\n      var audioPlayer = document.getElementById('audioPlayer')\n      wsAudioSock = new WebSocket(audioOuputSocket);\n      wsAudioSock.onopen = function(){\n          var table=document.getElementById(\"lab\");\n\t\tif(table === null || table === undefined || table === \"\"){\n\t\t\tmessageToPlay = \"I am not sure about the image can you retry it once again\";\n\t\t}\n\t\telse{\n\t\t\tmessageToPlay = \"The image strongly  resembles \" + table.value;}\n    ws.send(JSON.stringify(messageToPlay));\n\n\t\t  console.log(\"Connected websocket\");\n      };\n      wsAudioSock.onerror = function(){ \n          console.log(\"Websocket error\"); \n      };\n      wsAudioSock.onclose = function () {\n         \n      }\n      wsAudioSock.onmessage = function(evt){\n        console.log(\"Websocket message\", evt); \n        audioPlayer.src = window.URL.createObjectURL(evt.data);\n        audioPlayer.play();\n      };\n    });\n\tfunction sendMessage() {\n     var table=document.getElementById(\"lab\");\n     if(table === null || table === undefined || table === \"\"){\n         messageToPlay = \"Sorry Boss ! I cannot find out who you are\";\n     }\n     else{\n\t\t messageToPlay = \"The image strongly  resembles \" + table.value;}\n    ws.send(JSON.stringify(messageToPlay));\n    message.value = \"\";\n  };\n</script>\n</head>\n<body>\n<div id = \"header\">\n<h1>Image Analysis Result</h1>\n</div>\n<div id = \"q\">\n<h3>Analyzed image: {{messageToPlay}}</h3>\n</div>\n<div id = \"image\" align = \"center\" >\n<img src=\"{{payload}}\" height='200'/>\n</div>\n<div align = \"center\">\n<table border='1'>\n    <thead><tr><th>Name</th><th>Score</th></tr></thead>\n{{#classes}}\n  <tr><td><b>{{class}}</b></td><td><i>{{score}}</i></td></tr>\n{{/classes}}\n</table>\n</div>\n{{#classes}}\n<input type = \"label\" hidden value = \"{{class}}\" id = \"lab\"/>\n{{/classes}}\n<div align = \"center\">\n<form  action=\"{{req._parsedUrl.pathname}}\">\n    <input type=\"submit\" class=\"button button1\" value=\"Try again\"/>\n\t <input type=\"button\" class=\"button button1\" id=\"send_btn\" value=\"Audio\" onclick=sendMessage()>\n</form>\n</div>\n<div>\n  <audio id=\"audioPlayer\" type=\"audio/wav\"></audio>\n</div>\n</body>\n<style>\n.button {\n    background-color: #4CAF50; \n    border: none;\n    color: white;\n    padding: 16px 32px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    font-size: 16px;\n    margin: 4px 2px;\n    -webkit-transition-duration: 0.4s; \n    transition-duration: 0.4s;\n    cursor: pointer;\n}\n.button1 {\n    background-color: white; \n    color: black; \n    border: 2px solid #4CAF50;\n}\n\n.button1:hover {\n    background-color: #4CAF50;\n    color: white;\n}\n#image{\nalign = \"center\";\npadding: 8px;\n}\n#header {\n    background-color: #264a60;\n    color:white;\n    text-align:center;\n\tposition: relative;\n    padding:5px;\n\tfont-family: Gill Sans, Verdana;\n\tfont-size: 11px;\n\tline-height: 14px;\n\tletter-spacing: 2px;\n\tfont-weight: bold;\n}\n#q {\n    background-color:#848484;\n    color:white;\n    text-align:center;\n    padding:5px;\n\tfont-family: Gill Sans, Verdana;\n\tfont-size: 11px;\n\tline-height: 14px;\n\tletter-spacing: 2px;\n\tfont-weight: bold;\n}\ntable {\n    border-collapse: collapse;\n}\n\nth, td {\n    text-align: left;\n    padding: 8px;\n}\n\ntr:nth-child(even){background-color: #f2f2f2}\n\nth {\n    background-color: #4CAF50;\n    color: white;\n}\nbody {\n\tbackground-color: #f0f0f0;\n}\n</style>\n</html>\n","x":966,"y":506,"wires":[["b3abf1a3.17309","183f341c.dd36ac"]]},{"id":"ff15a9b4.bd86a8","type":"change","z":"11c10b4b.de6f25","name":"Extract img URL","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload.imageurl","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":660,"y":527,"wires":[["995e25f1.8f4d98"]]},{"id":"183f341c.dd36ac","type":"debug","z":"11c10b4b.de6f25","name":"d2","active":false,"console":"false","complete":"labels","x":1104,"y":556,"wires":[]},{"id":"6c327ea7.b0981","type":"websocket in","z":"11c10b4b.de6f25","name":"AudioIn","server":"47291d3a.fc7354","client":"","x":305,"y":213.5,"wires":[["6a1847a6.0c2038"]]},{"id":"6a1847a6.0c2038","type":"function","z":"11c10b4b.de6f25","name":"","func":"var newMsg = { topic:\"\",payload:msg.payload};\nreturn newMsg;","outputs":1,"noerr":0,"x":599,"y":211.5,"wires":[["6f2bd8e9.b3db78","4b2153d1.54a45c"]]},{"id":"6f2bd8e9.b3db78","type":"debug","z":"11c10b4b.de6f25","name":"d1","active":false,"console":"false","complete":"true","x":779,"y":207,"wires":[]},{"id":"d3dd41d7.9acaf","type":"function","z":"11c10b4b.de6f25","name":"","func":"msg.payload = msg.speech;\nreturn msg;","outputs":1,"noerr":0,"x":942.818115234375,"y":335.54547119140625,"wires":[["5e1797bb.0d0528"]]},{"id":"5e1797bb.0d0528","type":"websocket out","z":"11c10b4b.de6f25","name":"","server":"32dfddd7.a27892","client":"","x":1143.0909423828125,"y":316.7272644042969,"wires":[]},{"id":"ba93efa2.63ea8","type":"change","z":"11c10b4b.de6f25","name":"Extract text","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload.message","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":1188.88330078125,"y":668.88330078125,"wires":[[]]},{"id":"4b2153d1.54a45c","type":"watson-text-to-speech","z":"11c10b4b.de6f25","name":"Text-Speech","lang":"english","voice":"en-US_MichaelVoice","format":"audio/wav","x":727.5,"y":283,"wires":[["d3dd41d7.9acaf"]]},{"id":"14659084.f3057f","type":"debug","z":"11c10b4b.de6f25","name":"Visual Recognition Debug Point","active":true,"console":"false","complete":"result.images[0].classifiers[0].classes[0]","x":885.5,"y":645,"wires":[]},{"id":"995e25f1.8f4d98","type":"visual-recognition-v3","z":"11c10b4b.de6f25","name":"","apikey":"__PWRD__","image-feature":"classifyImage","x":709,"y":589,"wires":[["14659084.f3057f","b03eeac1.c707e8"]]},{"id":"47291d3a.fc7354","type":"websocket-listener","z":"11c10b4b.de6f25","path":"/ws/AudioIn","wholemsg":"false"},{"id":"32dfddd7.a27892","type":"websocket-listener","path":"/ws/audio","wholemsg":"false"}]
+Select the text above and copy to the clipboard.
